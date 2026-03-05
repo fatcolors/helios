@@ -468,11 +468,10 @@ body {
 /* ── Footer ────────────────────────────────────────────── */
 .footer {
   position: fixed;
-  bottom: 0.8rem;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 3rem;
+  right: 1.5rem;
   z-index: 50;
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   font-weight: 400;
   letter-spacing: 0.05em;
   color: #666;
