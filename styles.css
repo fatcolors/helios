@@ -468,8 +468,8 @@ body {
 /* ── Footer ────────────────────────────────────────────── */
 .footer {
   position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
+  bottom: 0.8rem;
+  left: clamp(2rem, 6vw, 6rem);
   z-index: 50;
   font-size: 0.7rem;
   font-weight: 400;
