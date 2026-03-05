@@ -420,7 +420,7 @@ body {
   z-index: 3;
   left: clamp(2rem, 6vw, 6rem);
   bottom: 3rem;
-  width: 200px;
+  width: 300px;
   height: auto;
   opacity: 0;
   transform: translateY(30px) scale(0.85);
