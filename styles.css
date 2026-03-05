@@ -1,0 +1,414 @@
+/* ==========================================================
+   HELIOS ATELIER — Scroll-Driven Hero Styles
+   ========================================================== */
+
+/* ── Reset & Base ───────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-bg: #ffffff;
+  --color-surface: #161514;
+  --color-text: #f0ece4;
+  --color-text-muted: #9a9590;
+  --color-gold: #c8a45c;
+  --color-gold-light: #dfc07f;
+  --color-accent: #c8a45c;
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+
+  --nav-height: 72px;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  scroll-behavior: auto;           /* we manage our own scroll UX */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+/* ── Loading Overlay ────────────────────────────────────── */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+.loader.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader__inner {
+  text-align: center;
+}
+
+.loader__brand {
+  font-family: var(--font-body);
+  font-size: 1.25rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
+}
+
+.loader__brand span {
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.loader__bar-track {
+  width: 200px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 1px;
+  overflow: hidden;
+  margin: 0 auto 1rem;
+}
+
+.loader__bar-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--color-gold);
+  border-radius: 1px;
+  transition: width 0.15s ease-out;
+}
+
+.loader__percent {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+/* ── Navigation ─────────────────────────────────────────── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-height);
+  padding: 0 clamp(1.5rem, 4vw, 3rem);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  opacity: 0;
+  transition: opacity 0.6s ease 0.3s;
+}
+
+.nav.is-visible {
+  opacity: 1;
+}
+
+.nav__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text);
+}
+
+.nav__logo-icon {
+  color: var(--color-gold);
+}
+
+.nav__logo-text {
+  font-size: 1.1rem;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+}
+
+.nav__logo-text strong {
+  font-weight: 600;
+}
+
+.nav__links {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+}
+
+.nav__links a {
+  color: #444;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.25s ease;
+}
+
+.nav__links a:hover {
+  color: #000;
+}
+
+.nav__cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 1.4rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  color: #333;
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.nav__cta:hover {
+  background: rgba(0, 0, 0, 0.04);
+  border-color: rgba(0, 0, 0, 0.4);
+}
+
+/* ── Scroll Progress Bar ────────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-gold-light));
+  z-index: 200;
+  transition: width 0.05s linear;
+  pointer-events: none;
+}
+
+/* ── Hero Scroll Container ──────────────────────────────── */
+.hero-scroll {
+  position: relative;
+  height: 500vh;   /* 4 screen-heights of scroll runway */
+}
+
+.hero-scroll__sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+}
+
+/* ── Canvas ─────────────────────────────────────────────── */
+.hero-scroll__canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+/* ── Overlay Cards ──────────────────────────────────────── */
+.hero-scroll__card {
+  position: absolute;
+  z-index: 2;
+  max-width: 360px;
+  padding: 2rem 2.25rem;
+
+  /* Transition: hidden by default */
+  opacity: 0;
+  transform: translateY(28px);
+  visibility: hidden;
+  transition:
+    opacity 0.55s var(--ease-out-expo),
+    transform 0.55s var(--ease-out-expo),
+    visibility 0.55s ease;
+  pointer-events: none;
+}
+
+.hero-scroll__card.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+}
+
+/* Positioning variants */
+.hero-scroll__card--left {
+  left: clamp(2rem, 6vw, 6rem);
+  top: 50%;
+  transform: translate(0, -50%) translateY(28px);
+}
+
+.hero-scroll__card--left.is-visible {
+  transform: translate(0, -50%) translateY(0);
+}
+
+.hero-scroll__card--right {
+  right: clamp(2rem, 6vw, 6rem);
+  top: 50%;
+  transform: translate(0, -50%) translateY(28px);
+}
+
+.hero-scroll__card--right.is-visible {
+  transform: translate(0, -50%) translateY(0);
+}
+
+.hero-scroll__card-label {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(200, 164, 92, 0.35);
+}
+
+.hero-scroll__card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: #3A3A3A;
+  margin-bottom: 0.75rem;
+}
+
+.hero-scroll__card-body {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #666;
+  font-weight: 300;
+}
+
+.text-muted {
+  color: #3A3A3A;
+  font-weight: 300;
+}
+
+.text-gold {
+  color: var(--color-gold);
+}
+
+/* ── Scroll Hint ────────────────────────────────────────── */
+.hero-scroll__hint {
+  position: absolute;
+  z-index: 3;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.hero-scroll__hint.is-hidden {
+  opacity: 0;
+}
+
+/* ── Statue Image ──────────────────────────────────────── */
+.hero-scroll__statue {
+  display: block;
+  width: 180px;
+  height: auto;
+  margin-top: 1rem;
+}
+
+/* ── Award Badge ───────────────────────────────────────── */
+.hero-scroll__award {
+  position: absolute;
+  z-index: 3;
+  left: clamp(2rem, 6vw, 6rem);
+  bottom: 3rem;
+  width: 200px;
+  height: auto;
+  opacity: 0;
+  transform: translateY(30px) scale(0.85);
+  transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo);
+  pointer-events: none;
+}
+
+.hero-scroll__award.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.scroll-dot {
+  animation: scrollDotBounce 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollDotBounce {
+  0%, 100% { cy: 7; }
+  50%      { cy: 16; }
+}
+
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav__links {
+    display: none;
+  }
+
+  .hero-scroll__card {
+    max-width: 280px;
+    padding: 1.5rem 1.5rem;
+  }
+
+  .hero-scroll__card--left {
+    left: 1rem;
+  }
+
+  .hero-scroll__card--right {
+    right: 1rem;
+  }
+
+}
+
+@media (max-width: 600px) {
+  .hero-scroll__card {
+    max-width: calc(100vw - 2rem);
+    left: 1rem !important;
+    right: 1rem !important;
+    top: auto !important;
+    transform: none !important;
+  }
+
+  .hero-scroll__card--left,
+  .hero-scroll__card--right {
+    bottom: 6rem;
+    top: auto;
+  }
+
+  .hero-scroll__card--left.is-visible,
+  .hero-scroll__card--right.is-visible {
+    transform: translateY(0) !important;
+  }
+}
