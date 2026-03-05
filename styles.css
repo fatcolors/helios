@@ -469,7 +469,8 @@ body {
 .footer {
   position: fixed;
   bottom: 0.8rem;
-  left: clamp(2rem, 6vw, 6rem);
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 50;
   font-size: 0.7rem;
   font-weight: 400;
