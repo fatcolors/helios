@@ -66,20 +66,20 @@
       <!-- Overlay phase cards — visibility controlled by scroll ranges -->
       <div id="phase-1" class="hero-scroll__card hero-scroll__card--left">
         <span class="hero-scroll__card-label">01</span>
-        <h2 class="hero-scroll__card-title">Where<br>Architecture<br>Becomes<br>Art</h2>
+        <h2 class="hero-scroll__card-title">Where<br><span class="text-gold">Architecture</span><br>Becomes<br>Art</h2>
         <p class="hero-scroll__card-body">Explore visionary architecture blending classical inspiration with modern design.</p>
       </div>
 
       <div id="phase-2" class="hero-scroll__card hero-scroll__card--right">
         <span class="hero-scroll__card-label">02</span>
-        <h2 class="hero-scroll__card-title">120+<br><span class="text-muted">Architectural<br>Concepts</span></h2>
+        <h2 class="hero-scroll__card-title">120+<br><span class="text-muted">Architectural<br><span class="text-gold">Concepts</span></span></h2>
         <p class="hero-scroll__card-body">A curated collection of timeless designs from around the world.</p>
         <img src="statue.png" alt="Kintsugi statue" class="hero-scroll__statue">
       </div>
 
       <div id="phase-3" class="hero-scroll__card hero-scroll__card--left">
         <span class="hero-scroll__card-label">03</span>
-        <h2 class="hero-scroll__card-title">Precision<br>in Every<br>Detail</h2>
+        <h2 class="hero-scroll__card-title"><span class="text-gold">Precision</span><br>in Every<br>Detail</h2>
         <p class="hero-scroll__card-body">Each piece meticulously crafted with attention to proportion, light, and material.</p>
       </div>
 
@@ -92,13 +92,20 @@
       <!-- Award badge -->
       <img id="award-badge" src="award.png" alt="2026 Best Digital Art Experience" class="hero-scroll__award">
 
-      <!-- Bottom scroll hint -->
-      <div id="scroll-hint" class="hero-scroll__hint">
-        <span>Scroll to explore</span>
-        <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
-          <rect x="1" y="1" width="14" height="22" rx="7" stroke="currentColor" stroke-width="1.5"/>
-          <circle class="scroll-dot" cx="8" cy="7" r="2" fill="currentColor"/>
-        </svg>
+      <!-- Hero heading — visible on load, fades on scroll -->
+      <div id="hero-heading" class="hero-heading">
+        <h1 class="hero-heading__title">
+          <span class="hero-heading__line">Where Architecture</span>
+          <span class="hero-heading__line">Becomes <span class="text-gold">Art</span></span>
+        </h1>
+        <!-- Scroll hint sits just below the heading -->
+        <div id="scroll-hint" class="hero-scroll__hint hero-scroll__hint--inline">
+          <span>Scroll to explore</span>
+          <svg width="16" height="24" viewBox="0 0 16 24" fill="none">
+            <rect x="1" y="1" width="14" height="22" rx="7" stroke="currentColor" stroke-width="1.5"/>
+            <circle class="scroll-dot" cx="8" cy="7" r="2" fill="currentColor"/>
+          </svg>
+        </div>
       </div>
 
     </div><!-- /.hero-scroll__sticky -->

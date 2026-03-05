@@ -26,8 +26,8 @@
     phases: [
       { id: 'phase-1', start: 0.05, end: 0.24 },
       { id: 'phase-2', start: 0.28, end: 0.46 },
-      { id: 'phase-3', start: 0.50, end: 0.68 },
-      { id: 'phase-4', start: 0.72, end: 0.92 },
+      { id: 'phase-3', start: 0.50, end: 0.68, persist: true },
+      { id: 'phase-4', start: 0.72, end: 0.92, persist: true },
     ],
 
     // Subtle rotation mapped to scroll progress
@@ -47,6 +47,7 @@
   const nav            = document.querySelector('.nav');
   const heroSection    = document.getElementById('hero-scroll');
   const awardBadge     = document.getElementById('award-badge');
+  const heroHeading    = document.getElementById('hero-heading');
 
   /* ── State ──────────────────────────────────────────────── */
 
@@ -156,16 +157,30 @@
     for (const phase of CONFIG.phases) {
       const el = document.getElementById(phase.id);
       if (!el) continue;
-      if (scrollProg >= phase.start && scrollProg <= phase.end) {
+      // phase-3, phase-4: keep visible once they appear (no end check)
+      if (phase.persist) {
+        el.classList.toggle('is-visible', scrollProg >= phase.start);
+      } else if (scrollProg >= phase.start && scrollProg <= phase.end) {
         el.classList.add('is-visible');
       } else {
         el.classList.remove('is-visible');
       }
     }
 
-    // Award badge: show during later scroll phases
+    // Award badge: keep visible once it appears
     if (awardBadge) {
-      awardBadge.classList.toggle('is-visible', scrollProg >= 0.65 && scrollProg <= 0.95);
+      awardBadge.classList.toggle('is-visible', scrollProg >= 0.65);
+    }
+
+    // Hero heading: fade out when user starts scrolling
+    if (heroHeading) {
+      if (scrollProg > 0.02) {
+        heroHeading.classList.add('is-fading');
+        heroHeading.classList.remove('is-visible');
+      } else {
+        heroHeading.classList.remove('is-fading');
+        heroHeading.classList.add('is-visible');
+      }
     }
 
     // Scroll hint: hide after first ~5% of scroll
@@ -235,6 +250,11 @@
 
     // Show nav
     nav.classList.add('is-visible');
+
+    // Show hero heading with staggered animation
+    if (heroHeading) {
+      setTimeout(() => heroHeading.classList.add('is-visible'), 300);
+    }
 
     // Bind scroll (passive — never blocks scrolling)
     window.addEventListener('scroll', onScroll, { passive: true });
