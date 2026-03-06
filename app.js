@@ -48,6 +48,7 @@
   const heroSection    = document.getElementById('hero-scroll');
   const awardBadge     = document.getElementById('award-badge');
   const heroHeading    = document.getElementById('hero-heading');
+  const contactInner   = document.querySelector('.contact__inner');
 
   /* ── State ──────────────────────────────────────────────── */
 
@@ -192,6 +193,14 @@
     const pageScrollMax = document.documentElement.scrollHeight - window.innerHeight;
     const pageProgress  = pageScrollMax > 0 ? (window.scrollY / pageScrollMax) * 100 : 0;
     scrollProgress.style.width = `${pageProgress}%`;
+
+    // Contact section: reveal when it enters viewport
+    if (contactInner) {
+      const contactRect = contactInner.getBoundingClientRect();
+      if (contactRect.top < window.innerHeight * 0.85) {
+        contactInner.classList.add('is-visible');
+      }
+    }
   }
 
   /* ==========================================================
