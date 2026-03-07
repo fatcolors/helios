@@ -155,11 +155,13 @@
     );
 
     // Update overlay phase cards
+    const isMobile = window.innerWidth <= 600;
     for (const phase of CONFIG.phases) {
       const el = document.getElementById(phase.id);
       if (!el) continue;
-      // phase-3, phase-4: keep visible once they appear (no end check)
-      if (phase.persist) {
+      // On mobile, phase-3 should not persist (phase-4 replaces it)
+      const shouldPersist = phase.persist && !(isMobile && phase.id === 'phase-3');
+      if (shouldPersist) {
         el.classList.toggle('is-visible', scrollProg >= phase.start);
       } else if (scrollProg >= phase.start && scrollProg <= phase.end) {
         el.classList.add('is-visible');
@@ -284,6 +286,30 @@
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
+  }
+
+  /* ── Mobile hamburger menu ─────────────────────────────── */
+
+  const hamburger = document.querySelector('.nav__hamburger');
+  const mobileMenu = document.querySelector('.mobile-menu');
+
+  function closeMenu() {
+    hamburger.classList.remove('is-active');
+    mobileMenu.classList.remove('is-open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
+  }
+
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => {
+      const isOpen = hamburger.classList.toggle('is-active');
+      mobileMenu.classList.toggle('is-open');
+      hamburger.setAttribute('aria-expanded', isOpen);
+      document.body.classList.toggle('menu-open', isOpen);
+    });
+
+    const closeBtn = mobileMenu.querySelector('.mobile-menu__close');
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
   }
 
 })();

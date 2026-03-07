@@ -34,7 +34,24 @@
       <li><a href="https://fatcolors.pl" target="_blank" rel="noopener noreferrer">About</a></li>
     </ul>
     <a href="index.html" class="nav__cta">Explore Gallery</a>
+    <button class="nav__hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="mobile-menu">
+    <button class="mobile-menu__close" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
+    </button>
+    <ul class="mobile-menu__links">
+      <li><a href="discover.html">Discover</a></li>
+      <li><a href="collections.html" class="nav__link--active">Collections</a></li>
+      <li><a href="artists.html">Artists</a></li>
+      <li><a href="exhibitions.html">Exhibitions</a></li>
+      <li><a href="https://fatcolors.pl" target="_blank" rel="noopener noreferrer">About</a></li>
+    </ul>
+    <a href="index.html" class="mobile-menu__cta">Explore Gallery</a>
+  </div>
 
   <!-- ============================================================
        COLLECTIONS PAGE — Single viewport, no scroll
@@ -137,6 +154,27 @@
 
   </main>
 
+
+  <script>
+    const hamburger = document.querySelector('.nav__hamburger');
+    const mobileMenu = document.querySelector('.mobile-menu');
+    function closeMenu() {
+      hamburger.classList.remove('is-active');
+      mobileMenu.classList.remove('is-open');
+      hamburger.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('menu-open');
+    }
+    if (hamburger && mobileMenu) {
+      hamburger.addEventListener('click', () => {
+        const isOpen = hamburger.classList.toggle('is-active');
+        mobileMenu.classList.toggle('is-open');
+        hamburger.setAttribute('aria-expanded', isOpen);
+        document.body.classList.toggle('menu-open', isOpen);
+      });
+      const closeBtn = mobileMenu.querySelector('.mobile-menu__close');
+      if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    }
+  </script>
 
   <!-- Collections page entrance animation script -->
   <script>
