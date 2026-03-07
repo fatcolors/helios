@@ -658,7 +658,7 @@ body.menu-open {
 
   .hero-scroll__card--left,
   .hero-scroll__card--right {
-    bottom: 5rem;
+    bottom: 9rem;
     top: auto;
   }
 
@@ -692,7 +692,7 @@ body.menu-open {
   }
 
   .hero-heading__title {
-    font-size: clamp(1.4rem, 7vw, 2.2rem);
+    font-size: clamp(2.2rem, 9vw, 3rem);
   }
 
   .hero-scroll__hint {
@@ -711,7 +711,7 @@ body.menu-open {
 @media (max-width: 380px) {
   .hero-scroll__card {
     padding: 1rem;
-    bottom: 4rem !important;
+    bottom: 7rem !important;
   }
 
   .hero-scroll__card-title {
