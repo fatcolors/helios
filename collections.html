@@ -70,7 +70,7 @@
     <!-- Collection panels -->
     <div class="collections__panels">
 
-      <a href="#" class="collections__panel">
+      <a href="collection.html?id=neoclassical-revival" class="collections__panel">
         <div class="collections__panel-bg collections__panel-bg--1"></div>
         <div class="collections__panel-content">
           <span class="collections__panel-number">01</span>
@@ -86,7 +86,7 @@
         </span>
       </a>
 
-      <a href="#" class="collections__panel">
+      <a href="collection.html?id=brutalist-echoes" class="collections__panel">
         <div class="collections__panel-bg collections__panel-bg--2"></div>
         <div class="collections__panel-content">
           <span class="collections__panel-number">02</span>
@@ -102,7 +102,7 @@
         </span>
       </a>
 
-      <a href="#" class="collections__panel">
+      <a href="collection.html?id=organic-futures" class="collections__panel">
         <div class="collections__panel-bg collections__panel-bg--3"></div>
         <div class="collections__panel-content">
           <span class="collections__panel-number">03</span>
@@ -118,7 +118,7 @@
         </span>
       </a>
 
-      <a href="#" class="collections__panel">
+      <a href="collection.html?id=sacred-geometry" class="collections__panel">
         <div class="collections__panel-bg collections__panel-bg--4"></div>
         <div class="collections__panel-content">
           <span class="collections__panel-number">04</span>
@@ -134,7 +134,7 @@
         </span>
       </a>
 
-      <a href="#" class="collections__panel">
+      <a href="collection.html?id=light-pavilions" class="collections__panel">
         <div class="collections__panel-bg collections__panel-bg--5"></div>
         <div class="collections__panel-content">
           <span class="collections__panel-number">05</span>
@@ -194,6 +194,17 @@
         setTimeout(() => {
           panel.classList.add('is-visible');
         }, 250 + i * 120);
+      });
+
+      // Intro sweep: reveal each panel image left→right, then return to white
+      const SWEEP_START  = 850;  // ms after load before sweep begins
+      const PANEL_DELAY  = 220;  // ms between each panel lighting up
+      const PANEL_HOLD   = 420;  // ms each panel stays revealed
+
+      panels.forEach((panel, i) => {
+        const showAt = SWEEP_START + i * PANEL_DELAY;
+        setTimeout(() => panel.classList.add('is-previewing'),    showAt);
+        setTimeout(() => panel.classList.remove('is-previewing'), showAt + PANEL_HOLD);
       });
     })();
   </script>

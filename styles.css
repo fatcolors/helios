@@ -1542,7 +1542,7 @@ body.menu-open {
   background-position: center;
   opacity: 0;
   transform: scale(1.05);
-  transition: opacity 0.6s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+  transition: opacity 0.35s var(--ease-out-expo), transform 0.5s var(--ease-out-expo);
 }
 
 /* Cinematic gradient overlay from bottom */
@@ -1559,36 +1559,68 @@ body.menu-open {
   );
 }
 
-.collections__panel:hover .collections__panel-bg {
+.collections__panel:hover .collections__panel-bg,
+.collections__panel.is-previewing .collections__panel-bg {
   opacity: 1;
   transform: scale(1);
 }
 
+.collections__panel.is-previewing .collections__panel-content {
+  transform: translateY(-4px);
+}
+
+.collections__panel.is-previewing .collections__panel-number {
+  color: var(--color-gold);
+}
+
+.collections__panel.is-previewing .collections__panel-title {
+  color: #fff;
+}
+
+.collections__panel.is-previewing .collections__panel-title .text-gold {
+  color: var(--color-gold-light);
+}
+
+.collections__panel.is-previewing .collections__panel-desc {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.collections__panel.is-previewing .collections__panel-meta {
+  color: var(--color-gold);
+  border-top-color: rgba(200, 164, 92, 0.4);
+}
+
+.collections__panel.is-previewing .collections__panel-arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+  color: var(--color-gold);
+}
+
 /* Per-panel images — ancient buildings, statues & artifacts */
 .collections__panel-bg--1 {
-  background-image: url('https://images.unsplash.com/photo-1555993539-1732b0258235?w=600&q=80');
+  background-image: url('https://images.unsplash.com/photo-1555993539-1732b0258235?w=1200&q=90');
 }
 
 .collections__panel-bg--2 {
-  background-image: url('https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=600&q=80');
+  background-image: url('https://images.unsplash.com/photo-1601581875309-fafbf2d3ed3a?w=1200&q=90');
 }
 
 .collections__panel-bg--3 {
-  background-image: url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=600&q=80');
+  background-image: url('https://images.unsplash.com/photo-1570168007204-dfb528c6958f?w=1200&q=90');
 }
 
 .collections__panel-bg--4 {
-  background-image: url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=600&q=80');
+  background-image: url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?w=1200&q=90');
 }
 
 .collections__panel-bg--5 {
-  background-image: url('https://images.unsplash.com/photo-1523978591478-c753949ff840?w=600&q=80');
+  background-image: url('https://images.unsplash.com/photo-1523978591478-c753949ff840?w=1200&q=90');
 }
 
 .collections__panel-content {
   position: relative;
   z-index: 1;
-  transition: transform 0.5s var(--ease-out-expo);
+  transition: transform 0.35s var(--ease-out-expo);
 }
 
 .collections__panel:hover .collections__panel-content {
@@ -1602,7 +1634,7 @@ body.menu-open {
   letter-spacing: 0.12em;
   color: #ccc;
   margin-bottom: 0.75rem;
-  transition: color 0.4s ease;
+  transition: color 0.25s ease;
 }
 
 .collections__panel:hover .collections__panel-number {
@@ -1616,7 +1648,7 @@ body.menu-open {
   line-height: 1.25;
   color: #2a2a2a;
   margin-bottom: 0.6rem;
-  transition: color 0.4s ease;
+  transition: color 0.25s ease;
 }
 
 .collections__panel:hover .collections__panel-title {
@@ -1633,7 +1665,7 @@ body.menu-open {
   color: #999;
   font-weight: 300;
   margin-bottom: 1rem;
-  transition: color 0.4s ease;
+  transition: color 0.25s ease;
 }
 
 .collections__panel:hover .collections__panel-desc {
@@ -1649,7 +1681,7 @@ body.menu-open {
   color: #bbb;
   padding-top: 0.6rem;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
-  transition: color 0.4s ease, border-color 0.4s ease;
+  transition: color 0.25s ease, border-color 0.25s ease;
 }
 
 .collections__panel:hover .collections__panel-meta {
@@ -2034,7 +2066,7 @@ body.menu-open {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.5);
-  transition: color 0.4s ease;
+  transition: color 0.25s ease;
 }
 
 .artists__tile:hover .artists__tile-craft {
@@ -2261,10 +2293,10 @@ body.menu-open {
 .exhibitions__featured-bg {
   position: absolute;
   inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1555993539-1732b0258235?w=900&q=80');
+  background-image: url('https://images.unsplash.com/photo-1555993539-1732b0258235?w=1200&q=90');
   background-size: cover;
   background-position: center;
-  opacity: 0.12;
+  opacity: 0.75;
   transform: scale(1.03);
   transition: opacity 0.6s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
 }
@@ -2275,9 +2307,9 @@ body.menu-open {
   inset: 0;
   background: linear-gradient(
     0deg,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(255, 255, 255, 0.7) 40%,
-    rgba(255, 255, 255, 0.1) 70%,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(255, 255, 255, 0.4) 35%,
+    rgba(255, 255, 255, 0.05) 60%,
     rgba(255, 255, 255, 0) 100%
   );
 }
@@ -2313,7 +2345,7 @@ body.menu-open {
   letter-spacing: -0.02em;
   color: #2a2a2a;
   margin-bottom: 1rem;
-  transition: color 0.4s ease;
+  transition: color 0.25s ease;
 }
 
 .exhibitions__featured:hover .exhibitions__featured-title {
